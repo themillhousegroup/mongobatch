@@ -8,8 +8,7 @@ Call a script with no arguments to get help about how to invoke it.
 
 Scripts will check any preconditions (e.g. existence of some external executable) and exit if they are not satisfied.
 
-All the scripts here use a convention where they expect to be passed the absolute 
-location of a directory containing one-or-more configuration files.
+All the scripts here use a convention where they expect to be passed the location (absolute or relative) of a directory containing one-or-more configuration files.
 
 Each file represents a database to be operated on using one of the tools.
 
@@ -37,7 +36,7 @@ Does a Mongo Export (JSON format) of each collection in each database found in t
 - The `mongoexport` tool must be in the `PATH`
  
 ###### Arguments
-- The absolute path of the config directory
+- The path to the config directory (absolute or relative to the script)
 - The absolute path of the directory to write the JSON files
 
 ###### Output
@@ -67,7 +66,7 @@ If invoked with `/tmp` as the output directory on May 13, 2016, `/tmp` would the
  
 ###### Notes
  - If reinvoked on the same day, files will be overwritten.
- - If reinvoken on a different day, any existing structure and content in the output directory will be preserved, and new subdirectories added as needed for the new date.
+ - If reinvoked on a different day, any existing structure and content in the output directory will be preserved, and new subdirectories added as needed for the new date.
   
 
 
