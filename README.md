@@ -12,7 +12,7 @@ All the scripts here use a convention where they expect to be passed the locatio
 
 Each file represents a database to be operated on using one of the tools.
 
-The filename is unimportant. The contents **must** be:
+The filename is *unimportant*. The contents **must** be:
 
 ```
         host:port
@@ -38,6 +38,7 @@ Does a Mongo Export (JSON format) of each collection in each database found in t
 ###### Arguments
 - The path to the config directory (absolute or relative to the script)
 - The absolute path of the directory to write the JSON files
+- (Optionally) the `database-name` of a single database to operate on 
 
 ###### Output
 - The output directory will have a subdirectory corresponding to each `database-name`
