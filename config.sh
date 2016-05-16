@@ -26,7 +26,8 @@ function finddbfile() {
       return
     fi
   done
-  echo "No match for target DB named $target; processing all files"
+  echo "No match for target DB named $target; will not continue."
+  exit
 }
 
 function readsinglefile() {
