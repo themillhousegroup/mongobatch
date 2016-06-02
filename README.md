@@ -70,6 +70,9 @@ If invoked with `/tmp` as the output directory on May 13, 2016, `/tmp` would the
  - If reinvoked on a different day, any existing structure and content in the output directory will be preserved, and new subdirectories added as needed for the new date.
   
 
-
+### Still To Come
+- `batchimport`
+- `seed-database`
+- `execute-script`
 
 
