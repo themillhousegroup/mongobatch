@@ -38,7 +38,9 @@ Does a Mongo Export (JSON format) of each collection in each database found in t
 ###### Arguments
 - The path to the config directory (absolute or relative to the script)
 - The absolute path of the directory to write the JSON files
-- (Optionally) the `database-name` of a single database to operate on 
+- (Optionally) `--database=database-name` - the name of a single database to operate on 
+- (Optionally) `--collection=coll-name` - the name of a single collection to operate on 
+- (Optionally) any extra arguments (for example, `--type=csv`) will be passed to `mongoexport`
 
 ###### Output
 - The output directory will have a subdirectory corresponding to each `database-name`
