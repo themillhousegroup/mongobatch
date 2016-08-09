@@ -8,7 +8,7 @@ then
 	echo "Arguments:"
 	echo "<config-dir> the absolute path to the place where config files are held"
 	echo "<dump-base>  the absolute path to the place where dumps should be stored"
-  echo "[db-name]    (optional) only process collections in the given databse"
+    echo "[db-name]    (optional) only process collections in the given database"
 	echo
 	echo "this path will have db_name/DATE directories put into it"
 	echo
