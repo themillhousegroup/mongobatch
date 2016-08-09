@@ -9,6 +9,7 @@ then
 	echo "<config-dir> the absolute path to the place where config files are held"
 	echo "<dump-base>  the absolute path to the place where dumps should be stored"
     echo "[--database=db-name]    (optional) only process collections in the given database"
+    echo "[--collection=coll-name]    (optional) only process the named collection"
 	echo
 	echo "this path will have db_name/DATE directories put into it"
 	echo
@@ -34,6 +35,9 @@ do
 case $i in 
 	--database=*)
 	DB_NAME="${i#*=}"
+	shift
+	--collection=*)
+	COLL_NAME="${i#*=}"
 	shift
 esac
 done
@@ -62,14 +66,16 @@ do
 
 	for collection in "${COLLECTIONS[@]}"
 	do
-		FILE_NAME="${collection}.json"
+		if [ -z ${COLL_NAME+x} ] || [ ${COLL_NAME} == collection ] ; then 
+			FILE_NAME="${collection}.json"
 
-		FILE_LOC="${DUMP_DIR}/${FILE_NAME}"
+			FILE_LOC="${DUMP_DIR}/${FILE_NAME}"
 
-		echo "Starting Mongo Export to $FILE_LOC"
-			
-		# Call mongoexport, feeding any remaining args in unchanged:
-		mongoexport -h ${HOST} -d ${DB_NAME} -c ${collection} -u ${USERNAME} -p ${PASSWORD} -o ${FILE_LOC} $@
+			echo "Starting Mongo Export to $FILE_LOC"
+				
+			# Call mongoexport, feeding any remaining args in unchanged:
+			mongoexport -h ${HOST} -d ${DB_NAME} -c ${collection} -u ${USERNAME} -p ${PASSWORD} -o ${FILE_LOC} $@
+		fi
 	done
 	echo
 	echo "Completed Mongo Export to directory ${DUMP_DIR}"
