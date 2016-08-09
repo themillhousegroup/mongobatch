@@ -8,7 +8,7 @@ then
 	echo "Arguments:"
 	echo "<config-dir> the absolute path to the place where config files are held"
 	echo "<dump-base>  the absolute path to the place where dumps should be stored"
-    echo "[db-name]    (optional) only process collections in the given database"
+    echo "[--database=db-name]    (optional) only process collections in the given database"
 	echo
 	echo "this path will have db_name/DATE directories put into it"
 	echo
@@ -26,8 +26,18 @@ then
 fi
 
 CONFIG_DIR=$1
-DUMP_BASE=$2
-DB_NAME=$3
+shift
+DUMP_BASE=$1
+shift
+for i in "$@"
+do 
+case $i in 
+	--database=*)
+	DB_NAME="${i#*=}"
+	shift
+esac
+done
+	
 
 DATE=`date "+%Y/%m/%d"`
 
@@ -57,8 +67,9 @@ do
 		FILE_LOC="${DUMP_DIR}/${FILE_NAME}"
 
 		echo "Starting Mongo Export to $FILE_LOC"
-
-		mongoexport -h ${HOST} -d ${DB_NAME} -c ${collection} -u ${USERNAME} -p ${PASSWORD} -o ${FILE_LOC}
+			
+		# Call mongoexport, feeding any remaining args in unchanged:
+		mongoexport -h ${HOST} -d ${DB_NAME} -c ${collection} -u ${USERNAME} -p ${PASSWORD} -o ${FILE_LOC} $@
 	done
 	echo
 	echo "Completed Mongo Export to directory ${DUMP_DIR}"
