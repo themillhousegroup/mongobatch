@@ -36,9 +36,11 @@ case $i in
 	--database=*)
 	DB_NAME="${i#*=}"
 	shift
+	;;
 	--collection=*)
 	COLL_NAME="${i#*=}"
 	shift
+	;;
 esac
 done
 	
@@ -66,7 +68,7 @@ do
 
 	for collection in "${COLLECTIONS[@]}"
 	do
-		if [ -z ${COLL_NAME+x} ] || [ ${COLL_NAME} == collection ] ; then 
+		if [ -z ${COLL_NAME+x} ] || [ ${COLL_NAME} == ${collection} ] ; then 
 			FILE_NAME="${collection}.json"
 
 			FILE_LOC="${DUMP_DIR}/${FILE_NAME}"
